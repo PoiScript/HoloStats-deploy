@@ -59,7 +59,7 @@ jobs:
 
       - name: Publish
         run: |
-          cp HoloStats/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh} bin
+          cp HoloStats/server/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh} bin
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add bin
