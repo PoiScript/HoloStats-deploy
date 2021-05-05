@@ -1,0 +1,68 @@
+name: Rust
+
+on: workflow_dispatch
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+
+    # step up postgres
+    services:
+      postgres:
+        image: postgres:12
+        env:
+          POSTGRES_USER: holostats
+          POSTGRES_PASSWORD: holostats
+          POSTGRES_DB: holostats
+        ports:
+          - 5432:5432
+        # needed because the postgres container does not provide a healthcheck
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@master
+
+      - uses: actions/checkout@v2
+        with:
+          # Repository name with owner. For example, actions/checkout
+          # Default: ${{ github.repository }}
+          repository: "PoiScript/HoloStats"
+          path: "HoloStats"
+
+      - run: cd HoloStats/server
+
+      - name: Initialize database
+        run: |
+          psql postgres://holostats:holostats@localhost/holostats -f sql/schema.sql -f sql/initial.sql
+
+      - name: Install Rust toolchain
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          profile: minimal
+          override: true
+
+      - name: Cache target/
+        uses: actions/cache@v1
+        with:
+          path: target
+          key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
+
+      - name: Create .env
+        run: mv .env.example .env
+
+      - name: Build
+        run: |
+          cargo build --release
+          strip target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh}
+
+      - name: Publish
+        run: |
+          cd $GITHUB_WORKSPACE
+          cp HoloStats/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh} bin
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git add bin
+          git commit -m "Compiled at $(date)"
+          git push
