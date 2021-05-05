@@ -43,7 +43,6 @@ jobs:
 
       - name: Cache target/
         uses: actions/cache@v1
-        working-directory: HoloStats/server
         with:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
