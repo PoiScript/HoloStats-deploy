@@ -1,4 +1,4 @@
-name: Web Prod
+name: Web
 
 on: workflow_dispatch
 
