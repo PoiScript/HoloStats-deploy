@@ -56,6 +56,8 @@ jobs:
         run: |
           cargo build --release
           strip target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh}
+        env:
+          DATABASE_URL: postgresql://localhost/postgres
 
       - name: Publish
         run: |
