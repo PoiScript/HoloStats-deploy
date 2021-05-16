@@ -47,9 +47,8 @@ jobs:
           path: target
           key: ${{ runner.os }}-cargo-build-target-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Create .env
-        working-directory: HoloStats/server
-        run: mv .env.example .env
+      - name: Create holostats.toml
+        run: mv holostats.example.toml holostats.toml
 
       - name: Build
         working-directory: HoloStats/server
