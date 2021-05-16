@@ -57,7 +57,7 @@ jobs:
           cargo build --release
           strip target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh}
         env:
-          DATABASE_URL: postgresql://localhost/postgres
+          DATABASE_URL: postgres://holostats:holostats@localhost/holostats
 
       - name: Publish
         run: |
