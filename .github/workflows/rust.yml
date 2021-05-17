@@ -62,8 +62,7 @@ jobs:
       - name: Publish
         run: |
           cp HoloStats/server/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh} bin
-          ls HoloStats/server
-          cp HoloStats/server/holostats.example.toml holostats.example.toml
+          cp HoloStats/server/holostats.toml holostats.example.toml
           git config user.name github-actions
           git config user.email github-actions@github.com
           git add bin holostats.example.toml
