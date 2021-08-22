@@ -18,6 +18,7 @@ api_keys = ["youtube_api_key1", "youtube_api_key2", "youtube_api_key3"]
 #
 # The actual url will be "https://${hostname}/api/pubsub/${pubsub_path}"
 pubsub_path = "XXXXXXX-XXXX-XXX-XXX-XXXX"
+pubsub_secret = "XXXXXXX-XXXX-XXX-XXX-XXXX"
 
 # Bilibili Crawling Configuration
 [bilibili]
@@ -268,6 +269,26 @@ bilibili = "674600646"
 [[vtubers]]
 id = "irys"
 youtube = "UC8rcEBzJSleTkf_-agPM20g"
+
+[[vtubers]]
+id = "sana"
+youtube = "UCsUj0dszADCGbF3gNrQEuSQ"
+
+[[vtubers]]
+id = "ceres"
+youtube = "UCO_aKKYxn4tvrqPjcTzZ6EQ"
+
+[[vtubers]]
+id = "ouro"
+youtube = "UCmbs8T6MWqUHP1tIQvSgKrg"
+
+[[vtubers]]
+id = "mumei"
+youtube = "UC3n5uGu18FoCy23ggWWp8tA"
+
+[[vtubers]]
+id = "hakos"
+youtube = "UCgmPnx-EEeOrZSg5Tiw7ZRQ"
 
 [[vtubers]]
 id = "miyabi"
