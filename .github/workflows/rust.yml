@@ -55,13 +55,13 @@ jobs:
         working-directory: HoloStats/server
         run: |
           cargo build --release
-          strip target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh}
+          strip target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh,live_chat}
         env:
           DATABASE_URL: postgres://holostats:holostats@localhost/holostats
 
       - name: Publish
         run: |
-          cp HoloStats/server/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh} bin
+          cp HoloStats/server/target/release/{api,subscribe,stream_stat,channel_stat,rss_refresh,live_chat} bin
           cp HoloStats/server/holostats.toml holostats.example.toml
           git config user.name github-actions
           git config user.email github-actions@github.com
